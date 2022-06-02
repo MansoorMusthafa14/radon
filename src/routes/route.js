@@ -1,9 +1,17 @@
 const express = require('express');
-
+const fruit=require('../util/helper')
 const router = express.Router();
-const dhoni=require('./logger')
+const dhoni=require('../logger/logger')
+const forMatter = require('../validator/formatter')
 router.get('/test-me1', function (req, res) {
-    console.log("my first project"+dhoni.endpoint)
+dhoni.welcome()
+fruit.printDate()
+    fruit.printMonth()
+    fruit.getBatchInfo()
+    forMatter.trim()
+    forMatter.lower()
+    forMatter.upper()
+
     res.send('My first ever api!')
 });
 

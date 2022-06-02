@@ -1,7 +1,7 @@
-const endpoint="www.functionup.org"
+// const endpoint="www.functionup.org"
 
-const file= function(){
-    console.log("i am mansoor")
-}
+// const file= function(){
+//     console.log("i am mansoor")
+// }
 
-module.exports.endpoint=endpoint
+// module.exports.endpoint=endpoint
