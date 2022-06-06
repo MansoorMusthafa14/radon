@@ -1,73 +1,75 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/students/:name', function(req, res) {
-    let studentName = req.params.name
-    console.log(studentName)
-    res.send(studentName)
-})
+// router.get('/students/:name', function(req, res) {
+//     let studentName = req.params.name
+//     console.log(studentName)
+//     res.send(studentName)
+// })
 
-router.get("/random" , function(req, res) {
-    res.send("hi there")
-})
-
-
-router.get("/test-api" , function(req, res) {
-    res.send("hi FunctionUp")
+router.get("/movies" , function(req, res) {
+    const movies=['The Shining','Incendies','Rang de Basanti','Finding Nemo']
+    res.send(movies)
 })
 
 
-router.get("/test-api-2" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API")
+router.get("/movies/:indexNumber" , function(req, res) {
+    const value=req.params.indexNumber
+    const movies=['The Shining','Incendies','Rang de Basanti','Finding Nemo']
+    res.send(movies[value]);
+    
 })
 
 
-router.get("/test-api-3" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's ")
-})
+router.get('/movies2/:index' , function(req, res) {
+    const value=req.params.index;
+    const movies=['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins','The Shining',"Titanic","Shutter Island","Pans Labyrinth","Wrath of Titans","Edge of Tommorrow"];
+    if(value<movies.length){
+        res.send(movies[value]);
+    }else{
+        res.send("Index Number Does not Exist");
+    }
+});
 
+     router.get("/films",function(req,res){
+     const film=[ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }];
+    res.send(film)
+       
+});
 
-router.get("/test-api-4" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
-})
-
-
-
-router.get("/test-api-5" , function(req, res) {
-    res.send("hi FunctionUp5. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
-})
-
-router.get("/test-api-6" , function(req, res) {
-    res.send({a:56, b: 45})
-})
-
-router.post("/test-post", function(req, res) {
-    res.send([ 23, 45 , 6])
-})
-
-
-router.post("/test-post-2", function(req, res) {
-    res.send(  { msg: "hi" , status: true }  )
-})
-
-router.post("/test-post-3", function(req, res) {
-    // let id = req.body.user
-    // let pwd= req.body.password
-
-    // console.log( id , pwd)
-
-    console.log( req.body )
-
-    res.send(  { msg: "hi" , status: true }  )
-})
-
-
-
-router.post("/test-post-4", function(req, res) {
-    let arr= [ 12, "functionup"]
-    let ele= req.body.element
-    arr.push(ele)
-    res.send(  { msg: arr , status: true }  )
-})
+router.get("/films/:indexID",function(req,res){
+    let value=req.params.indexID;
+    const film=[ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }];
+    if(value<film.length){
+        res.send(film[value]);
+    }else{
+        res.send("don't exist")
+    }
+       
+});
 
 module.exports = router;
