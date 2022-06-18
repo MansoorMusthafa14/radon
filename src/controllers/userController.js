@@ -31,7 +31,7 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "radon",
       organisation: "FunctionUp",
     },
     "functionup-radon"
@@ -63,7 +63,9 @@ const getUserData = async function (req, res) {
   if (!userDetails)
     return res.send({ status: false, msg: "No such user exists" });
 
+    if(userDetails.isDeleted === true) res.send({status: false, msg: "user deleted account"});
   res.send({ status: true, data: userDetails });
+
 };
 
 const updateUser = async function (req, res) {
@@ -80,11 +82,20 @@ const updateUser = async function (req, res) {
   }
 
   let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
+  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData ,{new:true});
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+const deleteUser = async (req, res)=>{
+
+  let userId = req.params.userId;
+
+  let updatedUser = await userModel.findOneAndUpdate({_id: userId}, {$set:{isDeleted:true}}, {new: true});
+  res.send({ status: true , msg : updateUser})
+}
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.deleteUser=deleteUser;
